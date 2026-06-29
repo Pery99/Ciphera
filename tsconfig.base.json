@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ciphera/types": ["packages/types/src/index.ts"],
+      "@ciphera/validation": ["packages/validation/src/index.ts"],
+      "@ciphera/crypto": ["packages/crypto/src/index.ts"],
+      "@ciphera/contracts": ["packages/contracts/src/index.ts"]
+    }
+  }
+}

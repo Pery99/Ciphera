@@ -1,0 +1,20 @@
+{
+  "name": "@ciphera/crypto",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && npm run test:unit",
+    "test:unit": "node test/crypto.test.mjs"
+  },
+  "dependencies": {
+    "@ciphera/types": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

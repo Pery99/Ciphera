@@ -1,0 +1,83 @@
+@media (min-width: 900px) {
+  .app-shell {
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: flex;
+  }
+
+  .mobile-hidden {
+    display: grid;
+  }
+
+  .home-panel {
+    border-right: 1px solid var(--line);
+  }
+
+  .chat-panel.mobile-hidden {
+    display: flex;
+  }
+}
+
+@media (max-width: 899px) {
+  :root {
+    --chat-media-max: min(72vw, 240px);
+  }
+
+  .app-shell--home .chat-panel {
+    display: none;
+  }
+
+  .app-shell--chat .home-panel {
+    display: none;
+  }
+
+  .app-shell--chat .chat-panel {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .chat-header {
+    padding-inline: 10px;
+  }
+
+  .message-pane {
+    padding: 12px 10px 16px;
+  }
+
+  .bubble-row {
+    max-width: min(96%, calc(100vw - 52px));
+  }
+
+  .bubble-row:has(.bubble--media) {
+    max-width: min(calc(100vw - 52px), calc(var(--chat-media-max) + 40px));
+  }
+
+  .bubble p {
+    font-size: 15px;
+  }
+
+  .composer {
+    gap: 5px;
+    padding: 2px 8px calc(5px + var(--safe-bottom));
+  }
+
+  .composer-textarea {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .chat-composer-stack .pending-attachments {
+    padding-inline: 8px;
+  }
+
+  .settings-body {
+    padding-inline: 14px;
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ciphera",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Privacy-first real-time messaging platform with client-side encrypted payload workflows.",
+  "scripts": {
+    "dev": "npm run dev --workspace @ciphera/web",
+    "dev:web": "npm run dev --workspace @ciphera/web",
+    "dev:api": "npm run start:dev --workspace @ciphera/api",
+    "build": "npm run build --workspace @ciphera/types && npm run build --workspace @ciphera/validation && npm run build --workspace @ciphera/contracts && npm run build --workspace @ciphera/api",
+    "build:all": "npm run build --workspace @ciphera/types && npm run build --workspace @ciphera/validation && npm run build --workspace @ciphera/contracts && npm run build --workspace @ciphera/crypto && npm run build --workspace @ciphera/api && npm run build --workspace @ciphera/web",
+    "build:web": "npm run build --workspace @ciphera/types && npm run build --workspace @ciphera/validation && npm run build --workspace @ciphera/contracts && npm run build --workspace @ciphera/crypto && npm run build --workspace @ciphera/web",
+    "build:api": "npm run build",
+    "test": "npm run build:all && npm run test:unit --workspace @ciphera/api && npm run test:unit --workspace @ciphera/validation && npm run test:unit --workspace @ciphera/crypto && npm run test --workspace @ciphera/web",
+    "start": "node apps/api/dist/main.js",
+    "start:railway": "npm run deploy:db --workspace @ciphera/api && npm start",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

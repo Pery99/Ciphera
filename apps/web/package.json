@@ -1,0 +1,31 @@
+{
+  "name": "@ciphera/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -p tsconfig.json && vite build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node test/static-regression.test.cjs",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@ciphera/contracts": "0.1.0",
+    "@ciphera/crypto": "0.1.0",
+    "@ciphera/types": "0.1.0",
+    "@ciphera/validation": "0.1.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io-client": "^4.7.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}

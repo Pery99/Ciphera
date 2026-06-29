@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@ciphera/types": ["../types/dist/index.d.ts"]
+    },
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src"]
+}

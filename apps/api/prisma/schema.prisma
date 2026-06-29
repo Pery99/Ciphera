@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String                    @id @default(cuid())
+  email             String                    @unique
+  username          String                    @unique
+  name              String
+  avatarUrl         String?
+  bio               String?
+  passwordHash      String
+  publicIdentityKey String
+  createdAt         DateTime                  @default(now())
+  updatedAt         DateTime                  @updatedAt
+  receivedRequests  ContactRequest[]          @relation("ReceivedRequests")
+  sentRequests      ContactRequest[]          @relation("SentRequests")
+  participants      ConversationParticipant[]
+  devices           Device[]
+  sentMessages      Message[]                 @relation("SentMessages")
+  sessions          Session[]
+  pushSubscriptions PushSubscription[]
+}
+
+model Session {
+  id          String    @id @default(cuid())
+  userId      String
+  refreshHash String
+  previousRefreshHash String?
+  previousRotatedAt DateTime?
+  userAgent   String?
+  ipAddress   String?
+  revokedAt   DateTime?
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([revokedAt])
+}
+
+model Device {
+  id         String    @id @default(cuid())
+  userId     String
+  label      String
+  publicKey  String
+  keyVersion Int       @default(1)
+  createdAt  DateTime  @default(now())
+  revokedAt  DateTime?
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([revokedAt])
+}
+
+model ContactRequest {
+  id          String   @id @default(cuid())
+  requesterId String
+  recipientId String
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  recipient   User     @relation("ReceivedRequests", fields: [recipientId], references: [id], onDelete: Cascade)
+  requester   User     @relation("SentRequests", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, recipientId])
+}
+
+model Conversation {
+  id           String                    @id @default(cuid())
+  type         String                    @default("direct")
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  participants ConversationParticipant[]
+  messages     Message[]
+
+  @@index([updatedAt])
+}
+
+model Invite {
+  id             String    @id @default(cuid())
+  tokenHash      String    @unique
+  inviterId      String
+  acceptedById   String?
+  conversationId String?
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  createdAt      DateTime  @default(now())
+
+  @@index([inviterId])
+  @@index([expiresAt])
+  @@index([acceptedById])
+}
+
+model ConversationParticipant {
+  id             String       @id @default(cuid())
+  conversationId String
+  userId         String
+  joinedAt       DateTime     @default(now())
+  readCursorId   String?
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+  @@index([readCursorId])
+}
+
+model Message {
+  id               String            @id @default(cuid())
+  conversationId   String
+  senderId         String
+  replyToId        String?
+  encryptedPayload Json
+  status           String            @default("sent")
+  createdAt        DateTime          @default(now())
+  deliveredAt      DateTime?
+  readAt           DateTime?
+  attachments      MediaAttachment[]
+  conversation     Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender           User              @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  replyTo          Message?          @relation("MessageReplies", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies          Message[]         @relation("MessageReplies")
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+  @@index([replyToId])
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model MediaAttachment {
+  id                   String   @id @default(cuid())
+  messageId            String
+  kind                 String
+  encryptedResourceRef String
+  cloudinaryPublicId   String?
+  mimeType             String
+  sizeBytes            Int
+  durationMs           Int?
+  width                Int?
+  height               Int?
+  createdAt            DateTime @default(now())
+  message              Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+}
