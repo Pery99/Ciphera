@@ -640,8 +640,11 @@
 /* Legal pages */
 
 .legal-screen {
-  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background:
     radial-gradient(circle at top left, color-mix(in srgb, var(--brand) 14%, transparent), transparent 34rem),
     var(--surface);
