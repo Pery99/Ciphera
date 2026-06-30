@@ -152,11 +152,6 @@ export function HomeSidebar({
               })
             )}
           </section>
-
-          <footer className="home-footer">
-            <span className="home-footer-dot" />
-            <span>{identityKey ? "Encrypted on this device" : "Preparing keys"}</span>
-          </footer>
         </>
       )}
     </aside>
