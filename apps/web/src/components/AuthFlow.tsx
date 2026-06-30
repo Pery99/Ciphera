@@ -321,11 +321,11 @@ export function AuthFlow({
             </p>
           )}
           <nav className="auth-legal-links" aria-label="Legal">
-            <a href="/privacy.html" target="_blank" rel="noreferrer">
+            <a href="/privacy">
               Privacy
             </a>
             <span aria-hidden="true">/</span>
-            <a href="/terms.html" target="_blank" rel="noreferrer">
+            <a href="/terms">
               Terms
             </a>
           </nav>

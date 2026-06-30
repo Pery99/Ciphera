@@ -431,8 +431,7 @@ The repo includes deployment-oriented files:
 - `railpack.json`
 - `vercel.json`
 - `middleware.js`
-- `apps/web/public/privacy.html`
-- `apps/web/public/terms.html`
+- React legal routes at `/privacy` and `/terms`
 
 Deployment expectations:
 
