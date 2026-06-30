@@ -304,21 +304,32 @@ export function AuthFlow({
       </div>
 
       <footer className="auth-bottom-bar">
-        {mode === "login" ? (
-          <p className="auth-bottom-copy">
-            Don&apos;t have an account?{" "}
-            <a href="/register" className="auth-register-link tap-spring" onClick={(event) => { event.preventDefault(); switchToSignup(); }}>
-              Register
+        <div className="auth-bottom-content">
+          {mode === "login" ? (
+            <p className="auth-bottom-copy">
+              Don&apos;t have an account?{" "}
+              <a href="/register" className="auth-register-link tap-spring" onClick={(event) => { event.preventDefault(); switchToSignup(); }}>
+                Register
+              </a>
+            </p>
+          ) : (
+            <p className="auth-bottom-copy">
+              Already have an account?{" "}
+              <a href="/" className="auth-register-link tap-spring" onClick={(event) => { event.preventDefault(); switchToLogin(); }}>
+                Log in
+              </a>
+            </p>
+          )}
+          <nav className="auth-legal-links" aria-label="Legal">
+            <a href="/privacy.html" target="_blank" rel="noreferrer">
+              Privacy
             </a>
-          </p>
-        ) : (
-          <p className="auth-bottom-copy">
-            Already have an account?{" "}
-            <a href="/" className="auth-register-link tap-spring" onClick={(event) => { event.preventDefault(); switchToLogin(); }}>
-              Log in
+            <span aria-hidden="true">/</span>
+            <a href="/terms.html" target="_blank" rel="noreferrer">
+              Terms
             </a>
-          </p>
-        )}
+          </nav>
+        </div>
       </footer>
     </main>
   );

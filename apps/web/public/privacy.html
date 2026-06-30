@@ -5,36 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ciphera Privacy Policy</title>
     <style>
+      :root {
+        color-scheme: light;
+        --ink: #17201b;
+        --muted: #61706a;
+        --brand: #1f7a4f;
+        --surface: #fbf8f3;
+        --line: #e7ded2;
+      }
       body {
-        max-width: 760px;
+        max-width: 780px;
         margin: 0 auto;
-        padding: 48px 20px;
+        padding: 48px 20px 64px;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.65;
-        color: #17201b;
-        background: #fbf8f3;
+        color: var(--ink);
+        background: var(--surface);
       }
-      h1, h2 { line-height: 1.2; }
-      a { color: #1f7a4f; }
+      h1,
+      h2 {
+        line-height: 1.2;
+      }
+      h1 {
+        margin-bottom: 4px;
+      }
+      h2 {
+        margin-top: 32px;
+      }
+      a {
+        color: var(--brand);
+        font-weight: 700;
+      }
+      .meta {
+        color: var(--muted);
+        margin-top: 0;
+      }
+      .notice {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.45);
+      }
     </style>
   </head>
   <body>
     <h1>Privacy Policy</h1>
-    <p>Last updated: June 27, 2026</p>
+    <p class="meta">Last updated: June 30, 2026</p>
 
-    <p>Ciphera is a portfolio messaging project. It is built to show privacy-first product and backend architecture, but it is not a production secure messenger.</p>
+    <p class="notice">
+      Ciphera is a portfolio messaging project. It demonstrates privacy-minded product architecture, client-side encrypted payload workflows, realtime messaging, and encrypted media handling.
+    </p>
 
-    <h2>What Ciphera Stores</h2>
-    <p>Ciphera may store account details, usernames, hashed passwords, sessions, conversation membership, encrypted message payloads, attachment metadata, invite records, push subscriptions, and delivery/read metadata.</p>
+    <h2>Information We Store</h2>
+    <p>
+      Ciphera may store account details, usernames, email addresses, hashed passwords, refresh-session records, conversation membership, invite records, encrypted message payloads, attachment metadata, delivery/read metadata, and push notification subscription metadata.
+    </p>
 
-    <h2>Message Content</h2>
-    <p>Message payloads and media are designed to be encrypted by the client before storage. Ciphera should not be used for highly sensitive communication because it does not implement a production end-to-end encryption protocol.</p>
+    <h2>Message And Media Content</h2>
+    <p>
+      Message bodies and uploaded media are encrypted in the browser before being sent to the backend. The API stores encrypted envelopes, encrypted media references, and metadata needed to operate the app. Ciphera does not store plaintext message bodies or raw media contents.
+    </p>
+    <p>
+      Ciphera should be described as client-side encrypted. It is not a production secure messenger and does not implement a full production end-to-end encryption protocol.
+    </p>
+
+    <h2>Cookies And Sessions</h2>
+    <p>
+      Ciphera uses HTTP-only refresh cookies for account sessions. Browser JavaScript receives short-lived access tokens, but refresh tokens are not intentionally exposed to frontend code.
+    </p>
+
+    <h2>Notifications</h2>
+    <p>
+      If notifications are enabled, Ciphera stores browser push subscription details and may send metadata-only notifications such as a conversation identifier and message identifier. Notification payloads do not include plaintext message content.
+    </p>
 
     <h2>Third-Party Services</h2>
-    <p>Ciphera may use infrastructure providers such as hosting, PostgreSQL, Redis, Cloudinary, and browser push services. Those providers may process technical metadata needed to operate the app.</p>
+    <p>
+      Ciphera may use infrastructure providers for hosting, PostgreSQL, Redis, Cloudinary media storage, and browser push delivery. These providers may process technical metadata required to run the service.
+    </p>
 
     <h2>Contact</h2>
-    <p>For questions, open an issue on the GitHub repository.</p>
+    <p>
+      For questions, open an issue on the GitHub repository or contact the project maintainer.
+    </p>
+
+    <p><a href="/">Back to Ciphera</a></p>
   </body>
 </html>
-
